@@ -21,11 +21,14 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
     try:
         with sr.Microphone() as source:
             logging.info("Adjusting for ambient noise...")
-            recognizer.adjust_for_ambient_noise(source, duration=1)
+            recognizer.adjust_for_ambient_noise(source, duration=2)
+            recognizer.dynamic_energy_threshold = True
             logging.info("Start speaking now...")
             
             # Record the audio
-            audio_data = recognizer.listen(source, timeout=timeout, phrase_time_limit=phrase_time_limit)
+            audio_data = recognizer.listen(
+                source, timeout=timeout, phrase_time_limit=phrase_time_limit
+                )
             logging.info("Recording complete.")
             
             # Convert the recorded audio to an MP3 file
@@ -38,7 +41,7 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
     except Exception as e:
         logging.error(f"An error occurred: {e}")
 
-
+record_audio(file_path="patient_voice_test.mp3")
 
 # Step2: Set up speech-to-text-STT-model for transcription
 
