@@ -5,22 +5,18 @@ from groq import Groq
 
 load_dotenv()
 
-#Step1: Setup GROQ API key
-
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-#Step2: Convert image to required format: base64
+def encode_image(image_path):
+    image_file = open(image_path, "rb")
+    return base64.b64encode(image_file.read()).decode('utf-8')
 
-image_path = "hairfall.jpg"
-image_file = open(image_path, "rb")
-
-encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
-
-client = Groq()
 query = "is there something wrong with my head?"
 model = "llama-3.2-90b-vision-preview"
 
-messages=[
+def analyze_image_with_query(query, model, encoded_image):
+    client = Groq()  
+    messages = [
         {
             "role": "user",
             "content": [
@@ -36,15 +32,12 @@ messages=[
                 },
             ],
         }]
-    
-chat_completion = client.chat.completions.create(
-    messages = messages,
-    model = model
-)
 
-print(chat_completion.choices[0].message.content)
+    chat_completion = client.chat.completions.create(
+        messages = messages,
+        model = model
+    )
 
-
-
+    return chat_completion.choices[0].message.content
 
 
