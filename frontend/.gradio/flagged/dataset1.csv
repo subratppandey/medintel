@@ -1,0 +1,10 @@
+audio_filepath,image_filepath,Speech to Text,Doctor's Response,output 2,timestamp
+.gradio/flagged/audio_filepath/f0a3892bf9f1bf058590/audio.wav,.gradio/flagged/image_filepath/68878df5f469e2c24bed/brokenleg.jpeg," Hey, I have a problem with my leg. What can I do to fix it?","With what I see, I think you have a medical condition known as lymphedema, which is characterized by swelling in the legs, especially after an injury, surgery, or infection. This could lead to discomfort and limited mobility if left untreated.
+
+To manage lymphedema, I would recommend:
+
+* Elevating the affected leg above the level of the heart to reduce swelling
+* Gentle exercises to improve circulation and promote lymphatic drainage
+* Avoiding tight clothing and using compression stockings to reduce swelling
+
+Please note that the use of compression stockings should be under a doctor's guidance as it could worsen the condition if not worn correctly.",,2025-03-27 17:47:09.481986
