@@ -13,11 +13,10 @@ from doctor_voice import text_to_speech_with_gtts, text_to_speech_with_elevenlab
 system_prompt = """
             You have to act as a professional doctor.
             What's in this image? Do you find anything wrong with it medically? 
-            If you make a differential, suggest some remedies for them. Do not add any numbers or special characters in 
+            If you make a differential, suggest some remedies for them. NEVER add any numbers, special characters, symbols and signs in 
             your response. Your response should be in one long paragraph. Also always answer as if you are answering to a real person.
-            Do not say 'In the image I see' but say 'With what I see, I think you have ...'
             Don't respond as an AI model in markdown, your answer should mimic that of an actual doctor not an AI bot, 
-            Keep your answer concise (max 3 sentences). 
+            Keep your answer concise (max 2 sentences). 
             No preamble, start your answer right away please."""
 
 def process_inputs(audio_filepath, image_filepath):
@@ -34,19 +33,23 @@ def process_inputs(audio_filepath, image_filepath):
         audio_filepath = audio_filepath,
         stt_model = "whisper-large-v3"
         )
-        
+
   # Handle the image input
     if image_filepath:
-        doctor_response = analyze_image_with_query(query=system_prompt+speech_to_text_output, encoded_image=encode_image(image_filepath), model="llama-3.2-11b-vision-preview")
+        doctor_response = analyze_image_with_query(
+            query=system_prompt + speech_to_text_output, 
+            encoded_image=encode_image(image_filepath), 
+            model="llama-3.2-11b-vision-preview"
+        )
     else:
-        doctor_response = "No image provided for me to analyze"
+        doctor_response = "Please provide me an image to analyze"
 
     voice_of_doctor = text_to_speech_with_elevenlabs(input_text=doctor_response, output_filepath="final.mp3") 
 
     return speech_to_text_output, doctor_response, voice_of_doctor
 
+# Create the user interface
 
-# Create the interface
 iface = gr.Interface(
     fn=process_inputs,
     inputs=[
@@ -58,7 +61,7 @@ iface = gr.Interface(
         gr.Textbox(label="Doctor's Response"),
         gr.Audio("Temp.mp3")
     ],
-    title="AI Doctor with Vision and Voice"
+    title="MedIntel: Your Reliable AI Doctor"
 )
 
 iface.launch(debug=True)
