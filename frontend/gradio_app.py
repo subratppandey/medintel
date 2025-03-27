@@ -11,10 +11,10 @@ from patient_voice import record_audio, transcribe_with_groq
 from doctor_voice import text_to_speech_with_gtts, text_to_speech_with_elevenlabs
 
 system_prompt = """
-            You have to act as a professional doctor.
             What's in this image? Do you find anything wrong with it medically? 
-            If you make a differential, suggest some remedies for them. NEVER add any numbers, special characters, symbols and signs in 
-            your response. Your response should be in one long paragraph. Also always answer as if you are answering to a real person.
+            If you make a differential, professionally suggest some remedies for them. NEVER EVER add any numbers, special characters, symbols and signs in 
+            your response. Refrain doing that strictly. Your response should be in one long paragraph. 
+            Always answer as if you are answering to a real person.
             Don't respond as an AI model in markdown, your answer should mimic that of an actual doctor not an AI bot, 
             Keep your answer concise (max 2 sentences). 
             No preamble, start your answer right away please."""
@@ -59,7 +59,6 @@ iface = gr.Interface(
     outputs=[
         gr.Textbox(label="Speech to Text"),
         gr.Textbox(label="Doctor's Response"),
-        gr.Audio("Temp.mp3")
     ],
     title="MedIntel: Your Reliable AI Doctor"
 )
