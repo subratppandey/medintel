@@ -23,9 +23,6 @@ def text_to_speech_with_gtts_old(input_text, output_filepath):
 
     audioobj.save(output_filepath)
 
-# input_text = "Hi, this is your friend Subrat Pandey"
-# text_to_speech_with_gtts_old(input_text=input_text, output_filepath="gtts_test.mp3")
-
 # Step1b: Set up text-to-speech-model with ElevenLabs
 
 def text_to_speech_with_elevenlabs_old(input_text, output_filepath):
@@ -91,4 +88,3 @@ def text_to_speech_with_elevenlabs(input_text, output_filepath):
     except Exception as e:
         print(f"An error occurred while trying to play the audio: {e}")
 
-text_to_speech_with_elevenlabs(input_text=elevenlabs_input_text, output_filepath="elevenlabs_autoplay_second_test.mp3")
